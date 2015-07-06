@@ -3,11 +3,15 @@ package com.gcit.lms.service;
 import java.sql.Connection;
 import java.util.List;
 
+import com.gcit.lms.dao.BookCopiesDAO;
+import com.gcit.lms.dao.BookDAO;
 import com.gcit.lms.dao.LibBranchDAO;
+import com.gcit.lms.domain.Book;
+import com.gcit.lms.domain.BookCopies;
 import com.gcit.lms.domain.LibBranch;
 
 public class LibraryService {
-	
+
 	public List<LibBranch> ListBranches() throws Exception { 
 		ConnectionUtil c = new ConnectionUtil(); 
 		Connection conn = c.createConnection(); 
@@ -23,7 +27,7 @@ public class LibraryService {
 			conn.close(); 
 		} 
 	} 
-	
+
 	public void UpdateLibBranch(LibBranch branch) throws Exception {
 		ConnectionUtil c = new ConnectionUtil();
 		Connection conn = c.createConnection();
@@ -49,4 +53,55 @@ public class LibraryService {
 		}
 	}
 
+	public List<Book> ListBook() throws Exception { 
+		ConnectionUtil c = new ConnectionUtil(); 
+		Connection conn = c.createConnection(); 
+
+
+		try { 
+			BookDAO bdao = new BookDAO(conn); 
+			List<Book> books = bdao.readAll(); 
+			conn.commit();//not sure if needed 
+			return books; 
+		} catch (Exception e) { 
+			e.printStackTrace(); 
+			conn.rollback();//not sure if needed 
+			return null; 
+		} finally { 
+			conn.close(); 
+		} 
+	} 
+
+	public void UpdateBookCopies(int branchId, int bookId, int noOfCopies ) throws Exception{
+
+		ConnectionUtil c = new ConnectionUtil(); 
+		Connection conn = c.createConnection(); 
+		BookCopiesDAO bcdao = new BookCopiesDAO(conn); 
+		BookDAO bookdao = new BookDAO(conn); 
+		LibBranchDAO branchdao = new LibBranchDAO(conn); 
+
+		try{
+
+			if(bookdao.readOne(bookId) == null || branchdao.readOne(branchId) == null){ 
+				throw new Exception("The book id or The Branch id does not match any book or branch"); 
+			} else {
+			
+			BookCopies bookcop = new BookCopies(); 
+			bookcop.setBookId(bookId); 
+			bookcop.setBranchId(branchId); 
+			bookcop.setNoOfCopies(noOfCopies); 
+
+
+			LibBranch lb = branchdao.readOne(branchId); 
+
+
+			}}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			conn.rollback();//not sure if needed 
+		} finally { 
+			conn.close(); 
+		} 
+
+	}
 }
