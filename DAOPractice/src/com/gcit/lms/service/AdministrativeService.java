@@ -28,7 +28,8 @@ public class AdministrativeService {
 		ConnectionUtil c = new ConnectionUtil();
 		Connection conn = c.createConnection();
 		try {
-			if (author == null || author.getAuthorName() == null
+			if (author == null 
+					|| author.getAuthorName() == null
 					|| author.getAuthorName().length() == 0
 					|| author.getAuthorName().length() > 45) {
 				throw new Exception(
@@ -52,7 +53,10 @@ public class AdministrativeService {
 		ConnectionUtil c = new ConnectionUtil();
 		Connection conn = c.createConnection();
 		try {
-			if(author == null){ 
+			if(author == null
+					|| author.getAuthorName() == null
+					|| author.getAuthorName().length() == 0
+					|| author.getAuthorName().length() > 45){ 
 				throw new Exception("The Author cannot be null"); 
 			}else{
 				AuthorDAO adao = new AuthorDAO(conn);
@@ -74,8 +78,11 @@ public class AdministrativeService {
 		ConnectionUtil c = new ConnectionUtil();
 		Connection conn = c.createConnection();
 		try {
-			if(author == null){ 
-				throw new Exception("The Author parameter cant be null"); 
+			if(author == null
+					|| author.getAuthorName() == null
+					|| author.getAuthorName().length() == 0
+					|| author.getAuthorName().length() > 45){ 
+				throw new Exception("The Author cannot be null"); 
 			}else{
 				AuthorDAO adao = new AuthorDAO(conn);
 				adao.delete(author); 
@@ -160,7 +167,9 @@ public class AdministrativeService {
 		ConnectionUtil c = new ConnectionUtil();
 		Connection conn = c.createConnection();
 		try {
-			if(genre == null){ 
+			if(genre == null
+					|| genre.getGenreName().length() == 0
+					|| genre.getGenreName().length() > 45){ 
 				throw new Exception("The Genre cannot be null"); 
 			}else{
 				GenreDAO gdao = new GenreDAO(conn);
@@ -181,7 +190,9 @@ public class AdministrativeService {
 		ConnectionUtil c = new ConnectionUtil();
 		Connection conn = c.createConnection();
 		try {
-			if(genre == null){ 
+			if(genre == null
+					|| genre.getGenreName().length() == 0
+					|| genre.getGenreName().length() > 45){ 
 				throw new Exception("The Genre cannot be null"); 
 			}else{
 				GenreDAO gdao = new GenreDAO(conn);
@@ -273,7 +284,16 @@ public class AdministrativeService {
 		ConnectionUtil c = new ConnectionUtil();
 		Connection conn = c.createConnection();
 		try {
-			if(publisher == null){ 
+			if(publisher == null
+					|| publisher.getPublisherName() == null
+					|| publisher.getPublisherName().length() == 0
+					|| publisher.getPublisherName().length() > 45 
+					|| publisher.getPublisherAddress() == null
+					|| publisher.getPublisherAddress().length() == 0
+					|| publisher.getPublisherAddress().length() > 45
+					|| publisher.getPublisherPhone() == null
+					|| publisher.getPublisherPhone().length() == 0
+					|| publisher.getPublisherPhone().length() > 45){ 
 				throw new Exception("The Publisher cannot be null"); 
 			}else{
 				PublisherDAO pdao = new PublisherDAO(conn);
@@ -293,7 +313,16 @@ public class AdministrativeService {
 		ConnectionUtil c = new ConnectionUtil();
 		Connection conn = c.createConnection();
 		try {
-			if(publisher == null){ 
+			if(publisher == null
+					|| publisher.getPublisherName() == null
+					|| publisher.getPublisherName().length() == 0
+					|| publisher.getPublisherName().length() > 45 
+					|| publisher.getPublisherAddress() == null
+					|| publisher.getPublisherAddress().length() == 0
+					|| publisher.getPublisherAddress().length() > 45
+					|| publisher.getPublisherPhone() == null
+					|| publisher.getPublisherPhone().length() == 0
+					|| publisher.getPublisherPhone().length() > 45){ 
 				throw new Exception("The Publisher cannot be null"); 
 			}else{
 				PublisherDAO pdao = new PublisherDAO(conn);
@@ -378,7 +407,10 @@ public class AdministrativeService {
 		ConnectionUtil c = new ConnectionUtil();
 		Connection conn = c.createConnection();
 		try {
-			if(book == null){ 
+			if(book == null
+					|| book.getTitle() == null
+					|| book.getTitle().length() == 0
+					|| book.getTitle().length() > 45){ 
 				throw new Exception("The Book cannot be null"); 
 			}else{
 				BookDAO bdao = new BookDAO(conn);
@@ -398,7 +430,10 @@ public class AdministrativeService {
 		ConnectionUtil c = new ConnectionUtil();
 		Connection conn = c.createConnection();
 		try {
-			if(book == null){ 
+			if(book == null
+					|| book.getTitle() == null
+					|| book.getTitle().length() == 0
+					|| book.getTitle().length() > 45 ){ 
 				throw new Exception("The Book cannot be null"); 
 			}else{
 				BookDAO bdao = new BookDAO(conn);
@@ -488,7 +523,13 @@ public class AdministrativeService {
 		ConnectionUtil c = new ConnectionUtil();
 		Connection conn = c.createConnection();
 		try {
-			if(branch == null){ 
+			if(branch == null 
+					|| branch.getLibraryBranchName() == null
+					|| branch.getLibraryBranchName().length() == 0
+					|| branch.getLibraryBranchName().length() > 45 
+					|| branch.getLibraryBranchAddress() == null
+					|| branch.getLibraryBranchAddress().length() == 0
+					|| branch.getLibraryBranchAddress().length() > 45 ){ 
 				throw new Exception("The LiBranch cannot be null"); 
 			}else{
 				LibBranchDAO lib = new LibBranchDAO(conn);
@@ -509,7 +550,13 @@ public class AdministrativeService {
 		ConnectionUtil c = new ConnectionUtil();
 		Connection conn = c.createConnection();
 		try {
-			if(branch == null){ 
+			if(branch == null
+					|| branch.getLibraryBranchName() == null
+					|| branch.getLibraryBranchName().length() == 0
+					|| branch.getLibraryBranchName().length() > 45 
+					|| branch.getLibraryBranchAddress() == null
+					|| branch.getLibraryBranchAddress().length() == 0
+					|| branch.getLibraryBranchAddress().length() > 45){ 
 				throw new Exception("The Book cannot be null"); 
 			}else{
 				LibBranchDAO lib = new LibBranchDAO(conn);
@@ -598,15 +645,24 @@ public class AdministrativeService {
 
 	/******************************************************************************************/
 
-	public void UpdateBorrower(Borrower borrow) throws Exception {
+	public void UpdateBorrower(Borrower bor) throws Exception {
 		ConnectionUtil c = new ConnectionUtil();
 		Connection conn = c.createConnection();
 		try {
-			if(borrow == null || borrow.getCardNo() == 0){ 
+			if(bor == null || bor.getCardNo() == 0
+					|| bor.getBorrowerName() == null
+					|| bor.getBorrowerName().length() == 0
+					|| bor.getBorrowerName().length() > 45 
+					|| bor.getBorrowerAddress() == null
+					|| bor.getBorrowerAddress().length() == 0
+					|| bor.getBorrowerAddress().length() > 45
+					|| bor.getBorrowerPhone() == null
+					|| bor.getBorrowerPhone().length() == 0
+					|| bor.getBorrowerPhone().length() > 45){ 
 				throw new Exception("The Borrower cannot be null or CardNo can not be 0 "); 
 			}else{
 				BorrowerDAO bordao = new BorrowerDAO(conn);
-				bordao.update(borrow); 
+				bordao.update(bor); 
 				conn.commit(); 
 			}
 		} catch (Exception e) {
@@ -710,7 +766,10 @@ public class AdministrativeService {
 		ConnectionUtil c = new ConnectionUtil();
 		Connection conn = c.createConnection();
 		try {
-			if(bookloans == null || bookloans.getCardNo() == 0 || bookloans.getBookId() == 0 || bookloans.getBranchId() == 0 ){ 
+			if(bookloans == null || bookloans.getCardNo() == 0 || bookloans.getBookId() == 0 || bookloans.getBranchId() == 0 
+					|| bookloans.getDateOut() == null 
+					|| bookloans.getDueDate() == null 
+					|| bookloans.getDateOut().after(bookloans.getDueDate())){ 
 				throw new Exception("The Borrower cannot be null or CardNo can not be 0 "); 
 			}else{
 				BookLoansDAO bookldao = new BookLoansDAO(conn);
@@ -727,15 +786,18 @@ public class AdministrativeService {
 
 	/******************************************************************************************/
 
-	public void DeleteBookLoans(BookLoans bookL) throws Exception {
+	public void DeleteBookLoans(BookLoans bookloan) throws Exception {
 		ConnectionUtil c = new ConnectionUtil();
 		Connection conn = c.createConnection();
 		try {
-			if(bookL == null){ 
+			if(bookloan == null
+					|| bookloan.getDateOut() == null 
+					|| bookloan.getDueDate() == null 
+					|| bookloan.getDateOut().after(bookloan.getDueDate())){ 
 				throw new Exception("The Borrower cannot be null"); 
 			}else{
 				BookLoansDAO bookLdao = new BookLoansDAO(conn);
-				bookLdao.delete(bookL); 
+				bookLdao.delete(bookloan); 
 				conn.commit(); 
 			}
 		} catch (Exception e) {
