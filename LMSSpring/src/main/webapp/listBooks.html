@@ -1,0 +1,120 @@
+<div ng-controller="bookCtrl">
+
+	<script src="https://code.angularjs.org/1.2.9/angular.min.js"></script>
+	<script
+		src="https://rawgit.com/dwmkerr/angular-modal-service/master/dst/angular-modal-service.js"></script>
+
+	<!--  
+      
+      <div ng-repeat="author in filteredAuthors">
+         {{author.authorName}}
+      </div>
+      <pagination total-items="totalItems" items-per-page="itemsPerPage" 
+         ng-model="currentPage" ng-change="pageChanged()"></pagination>
+      <p>
+         Total items: {{totalItems}}<br />
+         Items per page: {{itemsPerPage}}<br />
+         Current Page: {{currentPage}}
+      </p>
+   </section>
+   
+   -->
+
+
+	<table class="table">
+
+		<form class="navbar-form navbar-left" role="search">
+			<div class="form-group">
+				<input type="text" ng-model="bookToSearchName" class="form-control"
+					placeholder="Search"> <input type="button" value="Submit "
+					class="btn btn-default" ng-click="searchBook()">
+			</div>
+		</form>
+		<tr>
+			<th>Book Title</th>
+			<th>Books Author</th>
+			<th>Books Genre</th>
+			<th>Books Publisher</th>
+			<th>Edit</th>
+			<th>Delete</th>
+		</tr>
+		<tr ng-repeat="b in filteredBooks">
+			<td>{{b.title}}</td>
+			<td><lu data-ng-repeat="author in b.authors">{{author.authorName}}</lu></td>
+			<td>{{b.genres[0].genre_name}}</td>
+			<td>{{b.publisher.publisherName}}</td>
+			<td><button class="btn btn-success" ng-click="openModal(b)">Edit</button></td>
+			<td><button class="btn btn-danger" ng-click="deleteBook(b)">Delete</button></td>
+			</tr>
+		</tr>
+	</table>
+
+	<pagination total-items="totalItems" items-per-page="itemsPerPage"
+		ng-model="currentPage" ng-change="pageChanged()"></pagination>
+	<p>
+		Total items: {{totalItems}}<br /> Items per page: {{itemsPerPage}}<br />
+		Current Page: {{currentPage}}
+	</p>
+
+
+	<form class="form">
+		Enter Books Title: <input type="text" ng-model="bookToInsert.title" />
+		<h3>Authors</h3>
+		<td><div ng-repeat="author in authors">
+				<div class="action-checkbox">
+					<input id="{{author}}" type="checkbox" value="{{author}}"
+						ng-checked="selection.indexOf(author) > -1"
+						ng-click="toggleSelection(author)" /> <label for="{{author}}"></label>
+					{{author.authorName}}
+				</div>
+			</div>
+			<div ng-repeat="name in selection" class="selected-item">
+				{{author.authorName}}</div></td>
+		<h3>Genres</h3>
+		<td>
+			<div ng-repeat="genre in genres">
+				<div class="action-checkbox">
+					<input id="{{genre}}" type="checkbox" value="{{genre}}"
+						ng-checked="selection.indexOf(genre) > -1"
+						ng-click="toggleSelectionGEN(genre)" /> <label for="{{genre}}"></label>
+					{{genre.genre_name}}
+				</div>
+				</td>
+			</div>
+			<div ng-repeat="name in selection" class="selected-item">
+				{{genre.genre_name}}</div>
+		</td>
+		</td>
+		<h3>Publishers</h3>
+		<td>
+				<select id={{publisher}} ng-model="bookToInsert.publisher"
+					ng-options="publisher.publisherName for publisher in publishers"></select>
+<!--  --></td>
+				<!-- <div>Publishers: {{publisher.publisherName }}</div> -->
+		</td> <input type="submit" ng-click="addBook()" />
+	</form>
+
+
+	<script type="text/ng-template" id="myModalContentBOOK.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Edit Book</h3>
+        </div>
+        <div class="modal-body">
+            <ul>
+            </ul>
+Enter Title Name: <input type="text" name="title" ng-model="book.title">
+Enter Author Name: <input type="text" name="authorName" ng-model="book.authors[0].authorName">
+Enter Genre Name: <input type="text" name="genre_name" ng-model="book.genres[0].genre_name">
+Enter Publisher Name: <input type="text" name="publisherName" ng-model="book.publisher.publisherName">
+
+
+		<input type="submit"/>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+</div>
+
+

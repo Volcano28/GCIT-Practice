@@ -1,0 +1,83 @@
+<div ng-controller="libCtrl">
+
+<script src="https://code.angularjs.org/1.2.9/angular.min.js"></script>
+<script src="https://rawgit.com/dwmkerr/angular-modal-service/master/dst/angular-modal-service.js"></script>
+
+<!--  
+      
+      <div ng-repeat="author in filteredAuthors">
+         {{author.authorName}}
+      </div>
+      <pagination total-items="totalItems" items-per-page="itemsPerPage" 
+         ng-model="currentPage" ng-change="pageChanged()"></pagination>
+      <p>
+         Total items: {{totalItems}}<br />
+         Items per page: {{itemsPerPage}}<br />
+         Current Page: {{currentPage}}
+      </p>
+   </section>
+   
+   -->
+
+
+<table class="table">
+
+<form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" ng-model="libraryBranchToSearchName" class="form-control" placeholder="Search" >
+           <input
+		type="button"  value="Submit "class="btn btn-default" ng-click="searchLibraryBranch()">
+        </div>
+      </form>
+	<tr>
+		<th>Branch Name</th>
+		<th>Branch Adress</th>		
+		<th>Edit</th>
+		<th>Delete</th>
+	</tr>
+	<tr ng-repeat="l in filteredLibraryBranch">
+		<td>{{l.branchName}}</td>
+		<td>{{l.branchAddress}}</td>
+		<td><button class="btn btn-success"
+				ng-click="openModal(l)">Edit</button></td>
+		<td><button class="btn btn-danger"
+				ng-click="deletePublisher(l)">Delete</button></td>
+	</tr>
+</table>
+
+<pagination total-items="totalItems" items-per-page="itemsPerPage" 
+         ng-model="currentPage" ng-change="pageChanged()"></pagination>
+      <p>
+         Total items: {{totalItems}}<br />
+         Items per page: {{itemsPerPage}}<br />
+         Current Page: {{currentPage}}
+      </p>
+
+
+<form class="form">
+		Enter Branch Name: <input type="text" ng-model="libraryBranchToInsert.branchName"/>
+		Enter Branch Adress: <input type="text" ng-model="libraryBranchToInsert.BranchAdress"/>
+		<input type="submit" ng-click="addLibraryBranch()"/>
+	</form>
+	
+	
+    <script type="text/ng-template" id="myModalContentLib.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Edit Publisher</h3>
+        </div>
+        <div class="modal-body">
+            <ul>
+            </ul>
+Enter LibraryBranch Name: <input type="text" name="branchName" ng-model="libraryBranch.branchName">
+Enter LibraryBranch Address: <input type="text" name="branchAddress" ng-model="libraryBranch.branchAddress">
+
+		<input type="submit"/>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+</div>
+
+

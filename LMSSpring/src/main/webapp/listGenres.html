@@ -1,0 +1,80 @@
+<div ng-controller="genreCtrl">
+
+<script src="https://code.angularjs.org/1.2.9/angular.min.js"></script>
+<script src="https://rawgit.com/dwmkerr/angular-modal-service/master/dst/angular-modal-service.js"></script>
+
+<!--  
+      
+      <div ng-repeat="author in filteredAuthors">
+         {{author.authorName}}
+      </div>
+      <pagination total-items="totalItems" items-per-page="itemsPerPage" 
+         ng-model="currentPage" ng-change="pageChanged()"></pagination>
+      <p>
+         Total items: {{totalItems}}<br />
+         Items per page: {{itemsPerPage}}<br />
+         Current Page: {{currentPage}}
+      </p>
+   </section>
+   
+   -->
+
+
+<table class="table">
+
+<form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" ng-model="genreToSearchName" class="form-control" placeholder="Search" >
+           <input
+		type="button"  value="Submit "class="btn btn-default" ng-click="searchGenre()">
+        </div>
+      </form>
+	<tr>
+		<th>Genres Id</th>
+		<th>Genre Name</th>
+		<th>Edit</th>
+		<th>Delete</th>
+	</tr>
+	<tr ng-repeat="g in filteredGenres">
+		<td>{{g.genre_id}}</td>
+		<td>{{g.genre_name}}</td>
+		<td><button class="btn btn-success"
+				ng-click="openModal(g)">Edit</button></td>
+		<td><button class="btn btn-danger"
+				ng-click="deleteGenre(g)">Delete</button></td>
+	</tr>
+</table>
+
+<pagination total-items="totalItems" items-per-page="itemsPerPage" 
+         ng-model="currentPage" ng-change="pageChanged()"></pagination>
+      <p>
+         Total items: {{totalItems}}<br />
+         Items per page: {{itemsPerPage}}<br />
+         Current Page: {{currentPage}}
+      </p>
+
+
+<form class="form">
+		Enter Genre Name: <input type="text" ng-model="genreToInsert.genre_name"/>
+		<input type="submit" ng-click="addGenre()"/>
+	</form>
+	
+	
+    <script type="text/ng-template" id="myModalContentGEN.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Edit Genre</h3>
+        </div>
+        <div class="modal-body">
+            <ul>
+            </ul>
+Enter Genre Name: <input type="text" name="genre_name" ng-model="genre.genre_name">
+		<input type="submit"/>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+</div>
+
+
